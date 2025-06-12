@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "plugin": {
+    "secret": {
+      "iroha-transit-poc": {
+        "name": "iroha-transit",
+        "version": "0.0.1-alpha.1",
+        "repo": "soramitsukhmer-lab/poc-vault-iroha-integration",
+        "releases": {
+          "linux": {
+            "amd64": {
+              "url": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration/releases/download/0.0.1-alpha.1/iroha-transit-0.0.1-alpha.1-linux-amd64",
+              "sha256": "dbea25d1faaae42afbb0fb6b4c25763ce87feae4eaa9e38b7ae8db8e0a605b6c"
+            },
+            "arm64": {
+              "url": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration/releases/download/0.0.1-alpha.1/iroha-transit-0.0.1-alpha.1-linux-arm64",
+              "sha256": "f724601e023e2167dc467c7c393edb0d824a329f62aede095a9b5cc41cea097b"
+            }
+          },
+          "darwin": {
+            "amd64": {
+              "url": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration/releases/download/0.0.1-alpha.1/iroha-transit-0.0.1-alpha.1-darwin-amd64",
+              "sha256": "50baed2e7e1a34ab891f15f74c89db4f82054e620c723286568faed2be343a1d"
+            },
+            "arm64": {
+              "url": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration/releases/download/0.0.1-alpha.1/iroha-transit-0.0.1-alpha.1-darwin-arm64",
+              "sha256": "bf89c0db0d72a71639444d5a880c60d894dd831bb254442212a1abd08c671782"
+            }
+          }
+        }
+      }
+    }
+  }
+}
