@@ -1,0 +1,3 @@
+# Vault plugin catalog
+
+> WIP
