@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "plugin": {
+  "plugins": {
     "secret": {
       "iroha-transit-poc": {
         "name": "iroha-transit",
