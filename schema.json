@@ -4,20 +4,33 @@
     "type": "object",
     "properties": {
         "version": {
-            "type": "string"
+            "type": "string",
+            "default": "v1.0",
+            "description": "The version of the catalog schema, e.g., 'v1.0'."
         },
         "plugins": {
             "type": "object",
+            "description": "The collection of plugins available in the catalog.",
+            "default": {},
             "properties": {
-                "secret": {
+                "secrets": {
                     "type": "object",
+                    "description": "Plugin for managing secrets.",
+                    "default": {},
                     "patternProperties": {
                         "^[a-zA-Z0-9-_]+$": {
                             "type": "object",
+                            "description": "The plugin identifier, which can be any alphanumeric string with dashes or underscores.",
                             "properties": {
-                                "name": { "type": "string" },
-                                "version": { "type": "string" },
-                                "repo": { "type": "string" },
+                                "name": {
+                                    "$ref": "#/definitions/pluginMetadata/name"
+                                },
+                                "version": {
+                                    "$ref": "#/definitions/pluginMetadata/version"
+                                },
+                                "repo": {
+                                    "$ref": "#/definitions/pluginMetadata/repo"
+                                },
                                 "releases": {
                                     "type": "object",
                                     "properties": {
@@ -44,6 +57,27 @@
     "required": ["version", "plugins"],
     "additionalProperties": false,
     "definitions": {
+        "pluginMetadata": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the plugin, e.g., 'transit'.",
+                    "default": ""
+                },
+                "version": {
+                    "type": "string",
+                    "description": "The version of the plugin, e.g., '0.0.1-alpha.1'.",
+                    "default": ""
+                },
+                "repo": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The repository where the plugin is hosted, e.g., 'soramitsukhmer-lab/vault-plugin-iroha-transit-secrets'.",
+                    "default": ""
+                }
+            }
+        },
         "osRelease": {
             "type": "object",
             "properties": {
@@ -54,7 +88,6 @@
                     "$ref": "#/definitions/releaseInfo"
                 }
             },
-            "required": ["amd64", "arm64"],
             "additionalProperties": false
         },
         "releaseInfo": {
