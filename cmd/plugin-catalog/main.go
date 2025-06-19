@@ -31,6 +31,8 @@ func main() {
 			},
 		},
 		Commands: []*cli.Command{
+			installCommand(),
+			listCommand(),
 			updateCommand(),
 		},
 	}
