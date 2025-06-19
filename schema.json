@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Plugin Catalog Schema",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "string"
+        },
+        "plugins": {
+            "type": "object",
+            "properties": {
+                "secret": {
+                    "type": "object",
+                    "patternProperties": {
+                        "^[a-zA-Z0-9-_]+$": {
+                            "type": "object",
+                            "properties": {
+                                "name": { "type": "string" },
+                                "version": { "type": "string" },
+                                "repo": { "type": "string" },
+                                "releases": {
+                                    "type": "object",
+                                    "properties": {
+                                        "linux": {
+                                            "$ref": "#/definitions/osRelease"
+                                        },
+                                        "darwin": {
+                                            "$ref": "#/definitions/osRelease"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "required": ["name", "version", "repo", "releases"],
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "required": ["version", "plugins"],
+    "additionalProperties": false,
+    "definitions": {
+        "osRelease": {
+            "type": "object",
+            "properties": {
+                "amd64": {
+                    "$ref": "#/definitions/releaseInfo"
+                },
+                "arm64": {
+                    "$ref": "#/definitions/releaseInfo"
+                }
+            },
+            "required": ["amd64", "arm64"],
+            "additionalProperties": false
+        },
+        "releaseInfo": {
+            "type": "object",
+            "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "sha256": { "type": "string" }
+            },
+            "required": ["url", "sha256"],
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://github.com/soramitsukhmer-lab/vault-plugin-catalog/blob/main/schema.json",
   "version": "0.1",
   "plugins": {
     "secret": {
