@@ -72,7 +72,6 @@
                 },
                 "repo": {
                     "type": "string",
-                    "format": "uri",
                     "description": "The repository where the plugin is hosted, e.g., 'soramitsukhmer-lab/vault-plugin-iroha-transit-secrets'.",
                     "default": ""
                 }
