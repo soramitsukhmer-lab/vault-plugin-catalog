@@ -1,12 +1,12 @@
 {
-  "$schema": "https://github.com/soramitsukhmer-lab/vault-plugin-catalog/blob/main/schema.json",
-  "version": "0.1",
+  "$schema": "https://raw.githubusercontent.com/soramitsukhmer-lab/vault-plugin-catalog/refs/heads/main/schema.json",
+  "version": "v1.0",
   "plugins": {
-    "secret": {
+    "secrets": {
       "iroha-transit-poc": {
         "name": "iroha-transit",
         "version": "0.0.1-alpha.1",
-        "repo": "soramitsukhmer-lab/poc-vault-iroha-integration",
+        "repo": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration",
         "releases": {
           "linux": {
             "amd64": {
