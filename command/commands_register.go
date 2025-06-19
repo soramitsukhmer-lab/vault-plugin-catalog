@@ -8,8 +8,10 @@ import (
 
 func registerPluginCommand() *cli.Command {
 	return &cli.Command{
-		Name:  "register",
-		Usage: "Register a new plugin in the catalog",
+		Name:      "register",
+		Usage:     "Register a new plugin in the catalog",
+		Args:      true,
+		ArgsUsage: "<plugin-name>",
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {

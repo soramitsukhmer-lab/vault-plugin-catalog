@@ -8,8 +8,10 @@ import (
 
 func installPluginCommand() *cli.Command {
 	return &cli.Command{
-		Name:  "install",
-		Usage: "Install a plugin by name",
+		Name:      "install",
+		Usage:     "Install a plugin by name",
+		Args:      true,
+		ArgsUsage: "<plugin-name>",
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {

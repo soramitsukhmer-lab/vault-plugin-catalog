@@ -8,8 +8,10 @@ import (
 
 func uninstallPluginCommand() *cli.Command {
 	return &cli.Command{
-		Name:  "uninstall",
-		Usage: "Uninstall a plugin by name",
+		Name:      "uninstall",
+		Usage:     "Uninstall a plugin by name",
+		Args:      true,
+		ArgsUsage: "<plugin-name>",
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {
