@@ -1,11 +1,11 @@
 package types
 
 type Releases struct {
-	Linux  ReleasesArch `json:"linux,omitempty"`
-	Darwin ReleasesArch `json:"darwin,omitempty"`
+	Linux  ReleasesPlatform `json:"linux,omitempty"`
+	Darwin ReleasesPlatform `json:"darwin,omitempty"`
 }
 
-type ReleasesArch struct {
+type ReleasesPlatform struct {
 	Amd64 Release `json:"amd64,omitempty"`
 	Arm64 Release `json:"arm64,omitempty"`
 }
