@@ -3,10 +3,11 @@ package command
 import (
 	"fmt"
 
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/manager"
 	"github.com/urfave/cli/v2"
 )
 
-func uninstallPluginCommand() *cli.Command {
+func uninstallPluginCommand(m *manager.PluginManager) *cli.Command {
 	return &cli.Command{
 		Name:      "uninstall",
 		Usage:     "Uninstall a plugin by name",

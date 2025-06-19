@@ -3,10 +3,11 @@ package command
 import (
 	"fmt"
 
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/manager"
 	"github.com/urfave/cli/v2"
 )
 
-func registerPluginCommand() *cli.Command {
+func registerPluginCommand(m *manager.PluginManager) *cli.Command {
 	return &cli.Command{
 		Name:      "register",
 		Usage:     "Register a new plugin in the catalog",

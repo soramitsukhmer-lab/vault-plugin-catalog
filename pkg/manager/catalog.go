@@ -1,4 +1,4 @@
-package catalog
+package manager
 
 import (
 	"fmt"
@@ -11,7 +11,14 @@ type Catalog struct {
 	*types.Catalog
 }
 
-func (c *Catalog) GetReleaseByName(pluginName string) (*types.Release, error) {
+// NewCatalog initializes a new Catalog instance with the provided catalog data.
+func NewCatalog(catalog *types.Catalog) *Catalog {
+	return &Catalog{
+		Catalog: catalog,
+	}
+}
+
+func (c *Catalog) GetReleaseByName(pluginName string) (*Release, error) {
 	var plugin types.Plugin
 	if p, ok := c.Plugins.Secrets[pluginName]; ok {
 		plugin = p
@@ -39,5 +46,11 @@ func (c *Catalog) GetReleaseByName(pluginName string) (*types.Release, error) {
 		return nil, fmt.Errorf("unsupported architecture: %s", runtime.GOARCH)
 	}
 
-	return &release, nil
+	r := &Release{
+		PluginName:    pluginName,
+		PluginVersion: plugin.Version,
+		Release:       &release,
+	}
+
+	return r, nil
 }
