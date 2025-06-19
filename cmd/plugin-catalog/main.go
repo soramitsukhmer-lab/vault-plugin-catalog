@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	remotePluginCatalogURL = "https://raw.githubusercontent.com/soramitsukhmer-lab/vault-plugin-catalog/refs/heads/main/catalog.json"
-	localPluginCatalogPath = "/etc/vault-plugin-catalog/catalog.json"
+	defaultRemotePluginCatalogURL = "https://raw.githubusercontent.com/soramitsukhmer-lab/vault-plugin-catalog/refs/heads/main/catalog.json"
+	defaultLocalPluginCatalogPath = "/etc/vault-plugin-catalog/catalog.json"
 )
 
 func main() {
@@ -20,13 +20,13 @@ func main() {
 			&cli.StringFlag{
 				Name:    "local-catalog-path",
 				Usage:   "Path to the local plugin catalog file",
-				Value:   localPluginCatalogPath,
+				Value:   defaultLocalPluginCatalogPath,
 				EnvVars: []string{"LOCAL_PLUGIN_CATALOG_PATH"},
 			},
 			&cli.StringFlag{
 				Name:    "remote-catalog-url",
 				Usage:   "URL of the remote plugin catalog",
-				Value:   remotePluginCatalogURL,
+				Value:   defaultRemotePluginCatalogURL,
 				EnvVars: []string{"PLUGIN_CATALOG_URL"},
 			},
 		},
