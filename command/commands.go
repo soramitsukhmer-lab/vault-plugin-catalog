@@ -1,8 +1,6 @@
 package command
 
 import (
-	"fmt"
-
 	"github.com/urfave/cli/v2"
 )
 
@@ -34,10 +32,6 @@ func Run(args []string) error {
 			uninstallPluginCommand(),
 			registerPluginCommand(),
 			updateCatalogCommand(),
-		},
-		Action: func(*cli.Context) error {
-			fmt.Println("Hello friend!")
-			return nil
 		},
 	}
 
