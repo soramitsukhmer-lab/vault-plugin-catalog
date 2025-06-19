@@ -4,7 +4,7 @@
   "plugins": {
     "secrets": {
       "iroha-transit-poc": {
-        "name": "iroha-transit",
+        "name": "iroha-transit-poc",
         "version": "0.0.1-alpha.1",
         "repo": "https://github.com/soramitsukhmer-lab/poc-vault-iroha-integration",
         "releases": {
