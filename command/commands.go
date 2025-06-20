@@ -41,6 +41,7 @@ func Run(args []string) error {
 			},
 		},
 		Commands: []*cli.Command{
+			listPluginCommand(manager),
 			installPluginCommand(manager),
 			uninstallPluginCommand(manager),
 			registerPluginCommand(manager),
