@@ -1,4 +1,4 @@
-package manager
+package catalog
 
 type Release struct {
 	PluginName    string
