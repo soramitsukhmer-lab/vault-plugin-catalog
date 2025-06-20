@@ -59,7 +59,7 @@ func (c *CatalogManager) GetReleaseByName(pluginName string) (*Release, error) {
 	var pluginType string
 	if p, ok := c.Catalog.Plugins.Secrets[pluginName]; ok {
 		plugin = p
-		pluginType = "secrets"
+		pluginType = "secret"
 	} else {
 		return nil, fmt.Errorf("plugin %s not found in secrets catalog", pluginName)
 	}
