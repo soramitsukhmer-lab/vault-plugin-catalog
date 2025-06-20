@@ -29,6 +29,16 @@ func installPluginCommand(pm *manager.PluginManager) *cli.Command {
 				return fmt.Errorf("plugin name is required")
 			}
 
+			register := c.Bool("register")
+			if register {
+				// If the register flag is set, we install and register the plugin
+				if err := pm.InstallPluginWithRegistration(name); err != nil {
+					return fmt.Errorf("failed to install and register plugin %s: %w", name, err)
+				}
+				fmt.Printf("Plugin %s installed and registered successfully.\n", name)
+				return nil
+			}
+
 			// Here you would call the InstallPlugin method from your PluginManager
 			if err := pm.InstallPlugin(name); err != nil {
 				return fmt.Errorf("failed to install plugin %s: %w", name, err)

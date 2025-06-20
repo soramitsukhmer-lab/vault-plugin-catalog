@@ -50,6 +50,6 @@ func (p *PluginManager) InstallPluginWithRegistration(name string) error {
 	// 	return fmt.Errorf("failed to register plugin %s: %w", name, err)
 	// }
 
-	fmt.Printf("Plugin %s installed and registered successfully.\n", name)
+	fmt.Println("TODO: InstallPluginWithRegistration method is not implemented yet.")
 	return nil
 }
