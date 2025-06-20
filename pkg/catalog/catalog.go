@@ -130,6 +130,11 @@ func (r *CatalogManager) DownloadPlugin(release *Release) (*string, error) {
 		return nil, fmt.Errorf("failed to write plugin data to file %s: %w", tmpFileName, err)
 	}
 
+	// Fix file permissions
+	if err := os.Chmod(tmpFileName, 0755); err != nil {
+		return nil, fmt.Errorf("failed to set permissions for file %s: %w", tmpFileName, err)
+	}
+
 	fmt.Printf("Plugin %s downloaded successfully to %s\n", release.PluginName, tmpFileName)
 
 	return &tmpFileName, nil
