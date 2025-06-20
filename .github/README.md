@@ -1,6 +1,6 @@
 # Vault plugin catalog
 
-```bash
+```
 NAME:
    vault-plugin-catalog - A cli tool to manage HashiCorp Vault plugins
 
