@@ -7,12 +7,16 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func updateCatalogCommand(m *manager.PluginManager) *cli.Command {
+func updateCatalogCommand(pm *manager.PluginManager) *cli.Command {
+	flags := []cli.Flag{}
+	flags = append(flags, genericFlags...)
+
 	return &cli.Command{
 		Name:  "update",
 		Usage: "Update the local plugin catalog from the remote source",
+		Flags: flags,
 		Action: func(c *cli.Context) error {
-			if err := m.UpdateCatalog(); err != nil {
+			if err := pm.UpdateCatalog(); err != nil {
 				return fmt.Errorf("failed to update catalog: %w", err)
 			}
 			return nil

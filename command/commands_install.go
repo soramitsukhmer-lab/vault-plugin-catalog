@@ -7,18 +7,22 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func installPluginCommand(m *manager.PluginManager) *cli.Command {
+func installPluginCommand(pm *manager.PluginManager) *cli.Command {
+	flags := []cli.Flag{
+		&cli.BoolFlag{
+			Name:  "register",
+			Usage: "Register the plugin after installation",
+		},
+	}
+
+	flags = append(flags, genericFlags...)
+
 	return &cli.Command{
 		Name:      "install",
 		Usage:     "Install a plugin from the catalog",
 		Args:      true,
 		ArgsUsage: "<plugin-name>",
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
-				Name:  "register",
-				Usage: "Register the plugin after installation",
-			},
-		},
+		Flags:     flags,
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {
@@ -26,8 +30,7 @@ func installPluginCommand(m *manager.PluginManager) *cli.Command {
 			}
 
 			// Here you would call the InstallPlugin method from your PluginManager
-			fmt.Printf("Installing plugin: %s\n", name)
-			if err := m.InstallPlugin(name); err != nil {
+			if err := pm.InstallPlugin(name); err != nil {
 				return fmt.Errorf("failed to install plugin %s: %w", name, err)
 			}
 

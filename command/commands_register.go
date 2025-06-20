@@ -7,12 +7,16 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func registerPluginCommand(m *manager.PluginManager) *cli.Command {
+func registerPluginCommand(pm *manager.PluginManager) *cli.Command {
+	flags := []cli.Flag{}
+	flags = append(flags, genericFlags...)
+
 	return &cli.Command{
 		Name:      "register",
 		Usage:     "Register a new plugin in the catalog",
 		Args:      true,
 		ArgsUsage: "<plugin-name>",
+		Flags:     flags,
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {
@@ -20,7 +24,7 @@ func registerPluginCommand(m *manager.PluginManager) *cli.Command {
 			}
 			// Here you would call the RegisterPlugin method from your PluginManager
 			fmt.Printf("Registering plugin: %s\n", name)
-			if err := m.RegisterPlugin(name); err != nil {
+			if err := pm.RegisterPlugin(name); err != nil {
 				return fmt.Errorf("failed to register plugin %s: %w", name, err)
 			}
 

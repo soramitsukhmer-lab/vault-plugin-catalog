@@ -7,12 +7,16 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func uninstallPluginCommand(m *manager.PluginManager) *cli.Command {
+func uninstallPluginCommand(pm *manager.PluginManager) *cli.Command {
+	flags := []cli.Flag{}
+	flags = append(flags, genericFlags...)
+
 	return &cli.Command{
 		Name:      "uninstall",
 		Usage:     "Uninstall a plugin by name",
 		Args:      true,
 		ArgsUsage: "<plugin-name>",
+		Flags:     flags,
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {
@@ -20,7 +24,7 @@ func uninstallPluginCommand(m *manager.PluginManager) *cli.Command {
 			}
 			// Here you would call the UninstallPlugin method from your PluginManager
 			fmt.Printf("Uninstalling plugin: %s\n", name)
-			if err := m.UninstallPlugin(name); err != nil {
+			if err := pm.UninstallPlugin(name); err != nil {
 				return fmt.Errorf("failed to uninstall plugin %s: %w", name, err)
 			}
 

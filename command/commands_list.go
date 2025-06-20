@@ -5,12 +5,12 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func listPluginCommand(m *manager.PluginManager) *cli.Command {
+func listPluginCommand(pm *manager.PluginManager) *cli.Command {
 	return &cli.Command{
 		Name:  "list",
 		Usage: "List plugins in the catalog",
 		Action: func(c *cli.Context) error {
-			return m.ListPlugins()
+			return pm.ListPlugins()
 		},
 	}
 }
