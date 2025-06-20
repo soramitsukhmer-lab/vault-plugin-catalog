@@ -6,7 +6,9 @@ import (
 	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/catalog"
 )
 
-var message = `To register a plugin to HashiCorp Vault, please run the following command:
+var message = ` Prepare plugin registration for \"%s\" plugin:
+
+To register a plugin to HashiCorp Vault, please run the following command:
 $ vault plugin register -version=%s -sha256=%s -command=%s %s %s
 `
 
@@ -28,6 +30,7 @@ func (p *PluginManager) RegisterPlugin(name string) error {
 	pluginFileName := fmt.Sprintf("%s-%s", release.PluginName, release.PluginVersion)
 	fmt.Printf(
 		message,
+		release.ID,            // <plugin-id>
 		release.PluginVersion, // -version
 		release.Sha256,        // -sha256
 		pluginFileName,        // -command

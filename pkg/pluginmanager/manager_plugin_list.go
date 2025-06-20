@@ -23,8 +23,8 @@ func (p *PluginManager) ListPlugins() error {
 	fmt.Println("Listing plugins in the catalog...")
 	for _, release := range releases {
 		fmt.Printf(
-			"  - %s (ver=%s type=%s, SHA256=%s)\n",
-			release.PluginName, release.PluginVersion, release.PluginType, release.Sha256,
+			"  - %s (name=%s ver=%s type=%s, SHA256=%s)\n",
+			release.ID, release.PluginName, release.PluginVersion, release.PluginType, release.Sha256,
 		)
 	}
 
