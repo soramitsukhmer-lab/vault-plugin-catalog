@@ -6,7 +6,7 @@ import (
 	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/catalog"
 )
 
-var message = ` Prepare plugin registration for "%s" plugin:
+var message = `Prepare plugin registration for "%s" plugin:
 
 To register a plugin to HashiCorp Vault, please run the following command:
 $ vault plugin register -version=%s -sha256=%s -command=%s %s %s
