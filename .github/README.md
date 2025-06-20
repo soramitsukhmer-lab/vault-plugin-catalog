@@ -1,4 +1,6 @@
-# Vault plugin catalog
+# About
+
+A cli tool to manage HashiCorp Vault plugins.
 
 ```
 NAME:
@@ -18,3 +20,5 @@ COMMANDS:
 GLOBAL OPTIONS:
    --help, -h  show help
 ```
+
+The remote catalog is available at [soramitsukhmer-lab/vault-plugin-catalog-database](https://github.com/soramitsukhmer-lab/vault-plugin-catalog-database).
