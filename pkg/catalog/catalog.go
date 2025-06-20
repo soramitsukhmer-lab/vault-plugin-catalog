@@ -36,6 +36,22 @@ func NewCatalog(filepath string) (*CatalogManager, error) {
 	return cm, nil
 }
 
+func (c *CatalogManager) GetReleases() ([]Release, error) {
+	var releases []Release
+
+	for pluginName := range c.Catalog.Plugins.Secrets {
+		r, err := c.GetReleaseByName(pluginName)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get release for plugin %s: %w", pluginName, err)
+		}
+		if r != nil {
+			releases = append(releases, *r)
+		}
+	}
+
+	return releases, nil
+}
+
 func (c *CatalogManager) GetReleaseByName(pluginName string) (*Release, error) {
 	var plugin types.PluginSpec
 	var pluginType string
@@ -77,18 +93,7 @@ func (c *CatalogManager) GetReleaseByName(pluginName string) (*Release, error) {
 	return r, nil
 }
 
-func (c *CatalogManager) GetReleases() ([]Release, error) {
-	var releases []Release
 
-	for pluginName := range c.Catalog.Plugins.Secrets {
-		r, err := c.GetReleaseByName(pluginName)
-		if err != nil {
-			return nil, fmt.Errorf("failed to get release for plugin %s: %w", pluginName, err)
-		}
-		if r != nil {
-			releases = append(releases, *r)
-		}
 	}
 
-	return releases, nil
 }
