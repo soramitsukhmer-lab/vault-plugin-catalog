@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/pluginmanager"
 	"github.com/urfave/cli/v2"
@@ -23,6 +24,21 @@ func installPluginCommand(pm *pluginmanager.PluginManager) *cli.Command {
 		Args:      true,
 		ArgsUsage: "<plugin-name>",
 		Flags:     flags,
+		Before: func(c *cli.Context) error {
+			vaultPluginDir := c.String("vault-plugin-dir")
+			if vaultPluginDir == "" {
+				return fmt.Errorf("vault plugin directory cannot be empty")
+			}
+
+			// Check if vault plugin directory exists, if not, create it
+			if _, err := os.Stat(vaultPluginDir); os.IsNotExist(err) {
+				if err := os.MkdirAll(vaultPluginDir, 0755); err != nil {
+					return fmt.Errorf("failed to create vault plugin directory: %w", err)
+				}
+			}
+
+			return nil
+		},
 		Action: func(c *cli.Context) error {
 			name := c.Args().First()
 			if name == "" {
