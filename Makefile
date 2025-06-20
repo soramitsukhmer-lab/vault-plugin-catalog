@@ -1,6 +1,6 @@
 it: clean build
 
 clean:
-	rm -rf ./out || true
+	rm -rf ./binaries || true
 build:
 	docker buildx bake binaries

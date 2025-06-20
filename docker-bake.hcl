@@ -18,7 +18,7 @@ target "release" {
 }
 
 target "binaries" {
-    output = [ "./out" ]
+    output = [ "./binaries" ]
     platforms = [ "local" ]
     target = "binaries"
 }
