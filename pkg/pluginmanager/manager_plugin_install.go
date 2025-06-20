@@ -35,6 +35,11 @@ func (p *PluginManager) InstallPlugin(name string) error {
 		return fmt.Errorf("failed to copy plugin %s to Vault plugin directory: %w", release.PluginName, err)
 	}
 
+	// Fix file permissions
+	if err := os.Chmod(pluginInstallPath, 0755); err != nil {
+		return fmt.Errorf("failed to set permissions for plugin file %s: %w", pluginInstallPath, err)
+	}
+
 	return nil
 }
 
