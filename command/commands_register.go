@@ -20,6 +20,10 @@ func registerPluginCommand(m *manager.PluginManager) *cli.Command {
 			}
 			// Here you would call the RegisterPlugin method from your PluginManager
 			fmt.Printf("Registering plugin: %s\n", name)
+			if err := m.RegisterPlugin(name); err != nil {
+				return fmt.Errorf("failed to register plugin %s: %w", name, err)
+			}
+
 			return nil
 		},
 	}

@@ -20,6 +20,10 @@ func uninstallPluginCommand(m *manager.PluginManager) *cli.Command {
 			}
 			// Here you would call the UninstallPlugin method from your PluginManager
 			fmt.Printf("Uninstalling plugin: %s\n", name)
+			if err := m.UninstallPlugin(name); err != nil {
+				return fmt.Errorf("failed to uninstall plugin %s: %w", name, err)
+			}
+
 			return nil
 		},
 	}
