@@ -19,33 +19,7 @@
                     "default": {},
                     "patternProperties": {
                         "^[a-zA-Z0-9-_]+$": {
-                            "type": "object",
-                            "description": "The plugin identifier, which can be any alphanumeric string with dashes or underscores.",
-                            "properties": {
-                                "name": {
-                                    "$ref": "#/definitions/pluginMetadata/properties/name"
-                                },
-                                "version": {
-                                    "$ref": "#/definitions/pluginMetadata/properties/version"
-                                },
-                                "repo": {
-                                    "$ref": "#/definitions/pluginMetadata/properties/repo"
-                                },
-                                "releases": {
-                                    "type": "object",
-                                    "properties": {
-                                        "linux": {
-                                            "$ref": "#/definitions/osRelease"
-                                        },
-                                        "darwin": {
-                                            "$ref": "#/definitions/osRelease"
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            },
-                            "required": ["name", "version", "repo", "releases"],
-                            "additionalProperties": false
+                            "$ref": "#/definitions/pluginSpec"
                         }
                     },
                     "additionalProperties": false
@@ -57,43 +31,92 @@
     "required": ["version", "plugins"],
     "additionalProperties": false,
     "definitions": {
-        "pluginMetadata": {
+        "pluginSpec": {
             "type": "object",
+            "description": "The plugin identifier, which can be any alphanumeric string with dashes or underscores.",
             "properties": {
                 "name": {
                     "type": "string",
-                    "description": "The name of the plugin, e.g., 'transit'.",
-                    "default": ""
+                    "description": "The name of the plugin, e.g., 'iroha-transit'."
                 },
                 "version": {
                     "type": "string",
-                    "description": "The version of the plugin, e.g., '0.0.1-alpha.1'.",
-                    "default": ""
+                    "description": "The version of the plugin, e.g., '0.0.1-alpha.1'."
                 },
                 "repo": {
                     "type": "string",
-                    "description": "The repository where the plugin is hosted, e.g., 'soramitsukhmer-lab/vault-plugin-iroha-transit-secrets'.",
-                    "default": ""
+                    "format": "uri",
+                    "description": "The repository where the plugin is hosted, e.g., https://github.com/soramitsukhmer-lab/vault-plugin-iroha-transit-secrets/."
+                },
+                "releases": {
+                    "$ref": "#/definitions/releaseSpec",
+                    "description": "The release specifications for the plugin, detailing available versions and their download URLs."
                 }
-            }
+            },
+            "required": [
+                "name",
+                "version",
+                "repo",
+                "releases"
+            ],
+            "additionalProperties": false
         },
-        "osRelease": {
+        "releaseSpec": {
+            "type": "object",
+            "properties": {
+                "darwin": {
+                    "$ref": "#/definitions/releasePlatformSpec",
+                    "description": "Release specifications for macOS (Darwin) platform."
+                },
+                "linux": {
+                    "$ref": "#/definitions/releasePlatformSpec",
+                    "description": "Release specifications for Linux platform."
+                }
+            },
+            "anyOf": [
+                {
+                    "required": ["darwin"]
+                },
+                {
+                    "required": ["linux"]
+                }
+            ],
+            "additionalProperties": false
+        },
+        "releasePlatformSpec": {
             "type": "object",
             "properties": {
                 "amd64": {
-                    "$ref": "#/definitions/releaseInfo"
+                    "$ref": "#/definitions/releaseArchitectureSpec",
+                    "description": "Release specifications for amd64 architecture."
                 },
                 "arm64": {
-                    "$ref": "#/definitions/releaseInfo"
+                    "$ref": "#/definitions/releaseArchitectureSpec",
+                    "description": "Release specifications for arm64 architecture."
                 }
             },
+            "anyOf": [
+                {
+                    "required": ["amd64"]
+                },
+                {
+                    "required": ["arm64"]
+                }
+            ],
             "additionalProperties": false
         },
-        "releaseInfo": {
+        "releaseArchitectureSpec": {
             "type": "object",
             "properties": {
-                "url": { "type": "string", "format": "uri" },
-                "sha256": { "type": "string" }
+                "url": { 
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL where the plugin binary can be downloaded."
+                },
+                "sha256": { 
+                    "type": "string",
+                    "description": "The SHA-256 checksum of the plugin binary, used for integrity verification."
+                }
             },
             "required": ["url", "sha256"],
             "additionalProperties": false
