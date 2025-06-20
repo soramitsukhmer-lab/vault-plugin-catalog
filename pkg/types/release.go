@@ -1,16 +1,16 @@
 package types
 
-type Releases struct {
-	Linux  ReleasesPlatform `json:"linux,omitempty"`
-	Darwin ReleasesPlatform `json:"darwin,omitempty"`
+type ReleaseSpec struct {
+	Linux  ReleasePlatformSpec `json:"linux,omitempty"`
+	Darwin ReleasePlatformSpec `json:"darwin,omitempty"`
 }
 
-type ReleasesPlatform struct {
-	Amd64 Release `json:"amd64,omitempty"`
-	Arm64 Release `json:"arm64,omitempty"`
+type ReleasePlatformSpec struct {
+	Amd64 ReleaseArchitectureSpec `json:"amd64,omitempty"`
+	Arm64 ReleaseArchitectureSpec `json:"arm64,omitempty"`
 }
 
-type Release struct {
+type ReleaseArchitectureSpec struct {
 	Url    string `json:"url"`
 	Sha256 string `json:"sha256"`
 }
