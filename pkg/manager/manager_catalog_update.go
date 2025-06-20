@@ -24,6 +24,8 @@ func (p *PluginManager) UpdateCatalog() error {
 		}
 	}
 
+	fmt.Println("Updating catalog from remote source...")
+
 	// Fetch the latest catalog from the remote URL
 	resp, err := http.Get(p.RemoteCatalogURL)
 	if err != nil {
@@ -46,6 +48,8 @@ func (p *PluginManager) UpdateCatalog() error {
 	if err != nil {
 		return fmt.Errorf("failed to write to local catalog file: %w", err)
 	}
+
+	fmt.Println("Catalog updated successfully.")
 
 	return nil
 }
