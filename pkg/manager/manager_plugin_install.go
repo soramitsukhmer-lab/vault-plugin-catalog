@@ -30,7 +30,7 @@ func (p *PluginManager) InstallPlugin(name string) error {
 	pluginFileName := fmt.Sprintf("%s-%s", release.PluginName, release.PluginVersion)
 	pluginInstallPath := fmt.Sprintf("%s/%s", p.VaultPluginDir, pluginFileName)
 
-	fmt.Printf("Installing plugin: %s to %s...\n", pluginFileName, *downloadedFilePath)
+	fmt.Printf("Installing plugin: %s to %s...\n", pluginFileName, pluginInstallPath)
 	if err := os.Rename(*downloadedFilePath, pluginInstallPath); err != nil {
 		return fmt.Errorf("failed to copy plugin %s to Vault plugin directory: %w", release.PluginName, err)
 	}
