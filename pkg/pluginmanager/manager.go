@@ -1,4 +1,4 @@
-package manager
+package pluginmanager
 
 type PluginManager struct {
 	RemoteCatalogURL string

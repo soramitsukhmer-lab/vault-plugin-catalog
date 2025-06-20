@@ -1,7 +1,7 @@
 package command
 
 import (
-	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/manager"
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/pluginmanager"
 	"github.com/urfave/cli/v2"
 )
 
@@ -11,7 +11,7 @@ const (
 	defaultVaultPluginDir         = "/etc/vault/plugins"
 )
 
-var pm = &manager.PluginManager{}
+var pm = &pluginmanager.PluginManager{}
 
 var genericFlags = []cli.Flag{
 	&cli.StringFlag{

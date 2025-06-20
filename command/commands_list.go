@@ -1,11 +1,11 @@
 package command
 
 import (
-	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/manager"
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/pluginmanager"
 	"github.com/urfave/cli/v2"
 )
 
-func listPluginCommand(pm *manager.PluginManager) *cli.Command {
+func listPluginCommand(pm *pluginmanager.PluginManager) *cli.Command {
 	flags := []cli.Flag{}
 	flags = append(flags, genericFlags...)
 
