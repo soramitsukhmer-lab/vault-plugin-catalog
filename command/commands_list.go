@@ -10,7 +10,7 @@ func listPluginCommand(m *manager.PluginManager) *cli.Command {
 		Name:  "list",
 		Usage: "List plugins in the catalog",
 		Action: func(c *cli.Context) error {
-			return nil
+			return m.ListPlugins()
 		},
 	}
 }
