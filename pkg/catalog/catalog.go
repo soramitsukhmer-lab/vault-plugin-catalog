@@ -85,7 +85,8 @@ func (c *CatalogManager) GetReleaseByName(pluginName string) (*Release, error) {
 	}
 
 	r := &Release{
-		PluginName:    pluginName,
+		ID:            pluginName,
+		PluginName:    plugin.Name,
 		PluginVersion: plugin.Version,
 		PluginType:    pluginType,
 		Repo:          plugin.Repo,
