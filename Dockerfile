@@ -1,5 +1,6 @@
-FROM --platform=$BUILDPLATFORM golang:1.23-alpine AS builder
 ARG VERSION=
+FROM --platform=$BUILDPLATFORM golang:1.23-alpine AS builder
+ARG VERSION
 WORKDIR /src
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=bind,target=/src \
@@ -12,5 +13,11 @@ RUN --mount=type=cache,target=/go/pkg/mod \
         done
     done
 EOT
+
 FROM scratch AS binaries
 COPY --from=builder --link /out/vault-plugin-catalog-* /
+
+FROM scratch
+ARG VERSION
+ARG TARGETARCH
+COPY --from=binaries --link /vault-plugin-catalog${VERSION:+-${VERSION}}-linux-${TARGETARCH} /vault-plugin-catalog
