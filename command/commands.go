@@ -7,8 +7,8 @@ import (
 
 const (
 	defaultRemotePluginCatalogURL = "https://raw.githubusercontent.com/soramitsukhmer-lab/vault-plugin-catalog-database/refs/heads/main/catalog.json"
-	defaultLocalPluginCatalogPath = "/etc/vault-plugin-catalog/catalog.json"
 	defaultVaultPluginDir         = "/vault/plugins"
+	defaultLocalPluginCatalogPath = defaultVaultPluginDir + "/catalog.json"
 )
 
 var pm = &pluginmanager.PluginManager{}
