@@ -1,4 +1,5 @@
 ARG VERSION=
+
 FROM --platform=$BUILDPLATFORM golang:1.23-alpine AS builder
 ARG VERSION
 WORKDIR /src
@@ -9,7 +10,7 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     for GOOS in darwin linux; do
         for GOARCH in amd64 arm64; do
             export GOOS GOARCH
-            go build -ldflags="-s -w" -o /out/vault-plugin-catalog${VERSION:+-${VERSION}}-$GOOS-$GOARCH .
+            go build -ldflags="-s -w" -o /out/vault-plugin-catalog${VERSION:+-${VERSION}}-${GOOS}-${GOARCH} .
         done
     done
 EOT
