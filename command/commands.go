@@ -15,6 +15,13 @@ var pm = &pluginmanager.PluginManager{}
 
 var genericFlags = []cli.Flag{
 	&cli.StringFlag{
+		Name:        "vault-plugin-dir",
+		Usage:       "Directory where Vault plugins are stored",
+		Value:       defaultVaultPluginDir,
+		EnvVars:     []string{"VAULT_PLUGIN_DIR"},
+		Destination: &pm.VaultPluginDir,
+	},
+	&cli.StringFlag{
 		Name:        "local-catalog-path",
 		Usage:       "Path to the local plugin catalog file",
 		Value:       defaultLocalPluginCatalogPath,
@@ -27,13 +34,6 @@ var genericFlags = []cli.Flag{
 		Value:       defaultRemotePluginCatalogURL,
 		EnvVars:     []string{"REMOTE_PLUGIN_CATALOG_URL"},
 		Destination: &pm.RemoteCatalogURL,
-	},
-	&cli.StringFlag{
-		Name:        "vault-plugin-dir",
-		Usage:       "Directory where Vault plugins are stored",
-		Value:       defaultVaultPluginDir,
-		EnvVars:     []string{"VAULT_PLUGIN_DIR"},
-		Destination: &pm.VaultPluginDir,
 	},
 }
 
