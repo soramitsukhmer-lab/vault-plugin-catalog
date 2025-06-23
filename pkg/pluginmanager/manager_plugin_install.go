@@ -2,10 +2,10 @@ package pluginmanager
 
 import (
 	"fmt"
-	"io"
 	"os"
 
 	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/catalog"
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/utils"
 )
 
 func (p *PluginManager) InstallPlugin(name string) error {
@@ -32,7 +32,7 @@ func (p *PluginManager) InstallPlugin(name string) error {
 	pluginInstallPath := fmt.Sprintf("%s/%s", p.VaultPluginDir, pluginFileName)
 
 	fmt.Printf("Installing plugin: %s to %s...\n", pluginFileName, pluginInstallPath)
-	if err := crossDeviceCopy(*downloadedFilePath, pluginInstallPath); err != nil {
+	if err := utils.RenameCrossDevice(*downloadedFilePath, pluginInstallPath); err != nil {
 		return fmt.Errorf("failed to copy plugin %s to Vault plugin directory: %w", release.PluginName, err)
 	}
 
@@ -57,37 +57,5 @@ func (p *PluginManager) InstallPluginWithRegistration(name string) error {
 	// }
 
 	fmt.Println("TODO: InstallPluginWithRegistration method is not implemented yet.")
-	return nil
-}
-
-// Using os.Rename() with mounted volume in Docker or similar environments
-// will result in a invalid cross-device link error.
-func crossDeviceCopy(src, dst string) error {
-	srcFile, err := os.Open(src)
-	if err != nil {
-		return fmt.Errorf("failed to open source file %s: %w", src, err)
-	}
-	defer srcFile.Close()
-
-	dstFile, err := os.Create(dst)
-	if err != nil {
-		return fmt.Errorf("failed to create destination file %s: %w", dst, err)
-	}
-	defer dstFile.Close()
-
-	_, err = io.Copy(dstFile, srcFile)
-	if err != nil {
-		return fmt.Errorf("failed to copy file from %s to %s: %w", src, dst, err)
-	}
-
-	if err := dstFile.Sync(); err != nil {
-		return fmt.Errorf("failed to sync destination file %s: %w", dst, err)
-	}
-
-	err = os.Remove(src)
-	if err != nil {
-		return fmt.Errorf("failed to remove source file %s after copy: %w", src, err)
-	}
-
 	return nil
 }
