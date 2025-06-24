@@ -2,6 +2,7 @@ package command
 
 import (
 	"github.com/soramitsukhmer-lab/vault-plugin-catalog/pkg/pluginmanager"
+	"github.com/soramitsukhmer-lab/vault-plugin-catalog/version"
 	"github.com/urfave/cli/v2"
 )
 
@@ -39,8 +40,13 @@ var genericFlags = []cli.Flag{
 
 func Run(args []string) error {
 	app := &cli.App{
-		Name:  "vault-plugin-catalog",
-		Usage: "A cli tool to manage HashiCorp Vault plugins",
+		Name:    "vault-plugin-catalog",
+		Usage:   "A cli tool to manage HashiCorp Vault plugins",
+		Version: version.Version,
+		Authors: []*cli.Author{
+			{Name: "Soramitsu Khmer Lab", Email: "https://github.com/soramitsukhmer-lab"},
+			{Name: "Socheat Sok", Email: "https://github.com/socheatsok78"},
+		},
 		Commands: []*cli.Command{
 			listPluginCommand(pm),
 			installPluginCommand(pm),
